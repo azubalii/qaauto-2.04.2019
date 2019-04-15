@@ -28,5 +28,10 @@ public class LoginTest {
         passwordField.sendKeys(userPassword);
         signInButton.click();
 
+        WebElement welcomeMessage = driver.findElement(By.xpath("//a[@id='ember110']"));
+        Assert.assertEquals(driver.getTitle(), "LinkedIn");
+        Assert.assertEquals(welcomeMessage.getText(), "Welcome, Kian!");
+
+        driver.quit();
     }
 }
