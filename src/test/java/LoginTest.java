@@ -10,23 +10,23 @@ public class LoginTest {
     public void successfulLoginTest() {
         System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
-        String linkedinUrl = "https://www.linkedin.com";
+        String linkedInUrl = "https://www.linkedin.com";
         String userEmail = "auto.test.email01@gmail.com";
         String userPassword = "linked123";
 
-        driver.get(linkedinUrl);
+        driver.get(linkedInUrl);
 
         WebElement emailField = driver.findElement(By.xpath("//input[@id='login-email']"));
         WebElement passwordField = driver.findElement(By.xpath("//input[@id='login-password']"));
-        WebElement signinButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
+        WebElement signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
 
         Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up ");
         Assert.assertEquals(emailField.getAttribute("placeholder"),"Email");
         Assert.assertEquals(passwordField.getAttribute("placeholder"),"Password");
-        Assert.assertEquals(signinButton.getAttribute("value"),"Sign in");
+        Assert.assertEquals(signInButton.getAttribute("value"),"Sign in");
         emailField.sendKeys(userEmail);
         passwordField.sendKeys(userPassword);
-        signinButton.click();
+        signInButton.click();
 
     }
 }
