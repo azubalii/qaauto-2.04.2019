@@ -49,7 +49,7 @@ public class LoginTest {
         System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         String linkedInUrl = "https://www.linkedin.com";
-        String userEmail = "";
+        String userEmail = "auto.test.email01@gmail.com";
         String userPassword = "";
 
         driver.get(linkedInUrl);
@@ -66,19 +66,19 @@ public class LoginTest {
         passwordField.sendKeys(userPassword);
         signInButton.click();
 
-        WebElement profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
-        Assert.assertTrue(profileMenuItem.isDisplayed(), "Homepage is not loaded.");
+        Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up ");
+        Assert.assertEquals(emailField.getAttribute("dir"), "ltr");
 
         driver.quit();
     }
 
     @Test
-    public void negativeLoginTestWrongCredentials() {
+    public void negativeLoginTestWrongPassword() {
         System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         String linkedInUrl = "https://www.linkedin.com";
-        String userEmail = "wrong.auto.test.email01@gmail.com";
-        String userPassword = "linked123";
+        String userEmail = "auto.test.email01@gmail.com";
+        String userPassword = "_linked123";
 
         driver.get(linkedInUrl);
 
@@ -94,8 +94,8 @@ public class LoginTest {
         passwordField.sendKeys(userPassword);
         signInButton.click();
 
-        WebElement profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
-        Assert.assertTrue(profileMenuItem.isDisplayed(), "Homepage is not loaded.");
+        WebElement loginWrongPasswordErrorMessage = driver.findElement(By.xpath("//div[@id='error-for-password']"));
+        Assert.assertEquals(loginWrongPasswordErrorMessage.getText(), "Hmm, that's not the right password. Please try again or request a new one.");
 
         driver.quit();
     }
