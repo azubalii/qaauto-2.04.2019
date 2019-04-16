@@ -36,7 +36,21 @@ public class LoginTest {
 
         WebElement profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
         Assert.assertTrue(profileMenuItem.isDisplayed(), "Homepage is not loaded.");
+        profileMenuItem.click();
+
+        WebElement profileUserName = driver.findElement(By.xpath("//ul[@id='nav-settings__dropdown-options']//h3"));
+        Assert.assertEquals(profileUserName.getText(), "Kian Miller", "Wrong profile user name displayed.");
 
         driver.quit();
+    }
+
+    @Test
+    public void negativeLoginTestEmptyCredentials() {
+
+    }
+
+    @Test
+    public void negativeLoginTestWrongCredentials() {
+
     }
 }
