@@ -21,9 +21,9 @@ public class LoginTest {
         WebElement signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
 
         Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up ");
-        Assert.assertEquals(emailField.getAttribute("placeholder"),"Email");
-        Assert.assertEquals(passwordField.getAttribute("placeholder"),"Password");
-        Assert.assertEquals(signInButton.getAttribute("value"),"Sign in");
+        Assert.assertEquals(emailField.getAttribute("placeholder"), "Email");
+        Assert.assertEquals(passwordField.getAttribute("placeholder"), "Password");
+        Assert.assertEquals(signInButton.getAttribute("value"), "Sign in");
         emailField.sendKeys(userEmail);
         passwordField.sendKeys(userPassword);
         signInButton.click();
