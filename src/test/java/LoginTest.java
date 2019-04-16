@@ -29,7 +29,9 @@ public class LoginTest {
         signInButton.click();
 
         WebElement welcomeMessage = driver.findElement(By.xpath("//a[@id='ember110']"));
+        WebElement profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
         Assert.assertEquals(welcomeMessage.getText(), "Welcome, Kian!");
+        Assert.assertTrue(profileMenuItem.isDisplayed(), "Homepage is not loaded.");
 
         driver.quit();
     }
