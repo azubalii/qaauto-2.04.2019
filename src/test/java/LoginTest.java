@@ -46,11 +46,57 @@ public class LoginTest {
 
     @Test
     public void negativeLoginTestEmptyCredentials() {
+        System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        String linkedInUrl = "https://www.linkedin.com";
+        String userEmail = "";
+        String userPassword = "";
 
+        driver.get(linkedInUrl);
+
+        WebElement emailField = driver.findElement(By.xpath("//input[@id='login-email']"));
+        WebElement passwordField = driver.findElement(By.xpath("//input[@id='login-password']"));
+        WebElement signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
+
+        Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up ");
+        Assert.assertEquals(emailField.getAttribute("placeholder"), "Email");
+        Assert.assertEquals(passwordField.getAttribute("placeholder"), "Password");
+        Assert.assertEquals(signInButton.getAttribute("value"), "Sign in");
+        emailField.sendKeys(userEmail);
+        passwordField.sendKeys(userPassword);
+        signInButton.click();
+
+        WebElement profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
+        Assert.assertTrue(profileMenuItem.isDisplayed(), "Homepage is not loaded.");
+
+        driver.quit();
     }
 
     @Test
     public void negativeLoginTestWrongCredentials() {
+        System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        String linkedInUrl = "https://www.linkedin.com";
+        String userEmail = "wrong.auto.test.email01@gmail.com";
+        String userPassword = "linked123";
 
+        driver.get(linkedInUrl);
+
+        WebElement emailField = driver.findElement(By.xpath("//input[@id='login-email']"));
+        WebElement passwordField = driver.findElement(By.xpath("//input[@id='login-password']"));
+        WebElement signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
+
+        Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up ");
+        Assert.assertEquals(emailField.getAttribute("placeholder"), "Email");
+        Assert.assertEquals(passwordField.getAttribute("placeholder"), "Password");
+        Assert.assertEquals(signInButton.getAttribute("value"), "Sign in");
+        emailField.sendKeys(userEmail);
+        passwordField.sendKeys(userPassword);
+        signInButton.click();
+
+        WebElement profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
+        Assert.assertTrue(profileMenuItem.isDisplayed(), "Homepage is not loaded.");
+
+        driver.quit();
     }
 }
