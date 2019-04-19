@@ -20,10 +20,10 @@ public class LoginTest {
         WebElement passwordField = driver.findElement(By.xpath("//input[@id='login-password']"));
         WebElement signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
 
-        Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up ");
-        Assert.assertEquals(emailField.getAttribute("placeholder"), "Email");
-        Assert.assertEquals(passwordField.getAttribute("placeholder"), "Password");
-        Assert.assertEquals(signInButton.getAttribute("value"), "Sign in");
+        Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up ", "LogIn page is not loaded.");
+        Assert.assertEquals(emailField.getAttribute("placeholder"), "Email", "Placeholder is not correct in Email field");
+        Assert.assertEquals(passwordField.getAttribute("placeholder"), "Password", "Placeholder is not correct in Password field");
+        Assert.assertEquals(signInButton.getAttribute("value"), "Sign in", "SignIn button text is not correct");
         emailField.sendKeys(userEmail);
         passwordField.sendKeys(userPassword);
         signInButton.click();
@@ -58,16 +58,16 @@ public class LoginTest {
         WebElement passwordField = driver.findElement(By.xpath("//input[@id='login-password']"));
         WebElement signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
 
-        Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up ");
-        Assert.assertEquals(emailField.getAttribute("placeholder"), "Email");
-        Assert.assertEquals(passwordField.getAttribute("placeholder"), "Password");
-        Assert.assertEquals(signInButton.getAttribute("value"), "Sign in");
+        Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up ", "LogIn page is not loaded.");
+        Assert.assertEquals(emailField.getAttribute("placeholder"), "Email", "Placeholder is not correct in Email field");
+        Assert.assertEquals(passwordField.getAttribute("placeholder"), "Password", "Placeholder is not correct in Password field");
+        Assert.assertEquals(signInButton.getAttribute("value"), "Sign in", "SignIn button text is not correct");
         emailField.sendKeys(userEmail);
         passwordField.sendKeys(userPassword);
         signInButton.click();
 
-        Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up ");
-        Assert.assertEquals(emailField.getAttribute("dir"), "ltr");
+        Assert.assertEquals(emailField.getAttribute("dir"), "ltr", "Email field is blank.");
+        Assert.assertTrue(signInButton.isDisplayed(), "LogIn page is not displayed.");
 
         driver.quit();
     }
@@ -86,16 +86,18 @@ public class LoginTest {
         WebElement passwordField = driver.findElement(By.xpath("//input[@id='login-password']"));
         WebElement signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
 
-        Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up ");
-        Assert.assertEquals(emailField.getAttribute("placeholder"), "Email");
-        Assert.assertEquals(passwordField.getAttribute("placeholder"), "Password");
-        Assert.assertEquals(signInButton.getAttribute("value"), "Sign in");
+        Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up ", "LogIn page is not loaded.");
+        Assert.assertEquals(emailField.getAttribute("placeholder"), "Email", "Placeholder is not correct in Email field");
+        Assert.assertEquals(passwordField.getAttribute("placeholder"), "Password", "Placeholder is not correct in Password field");
+        Assert.assertEquals(signInButton.getAttribute("value"), "Sign in", "SignIn button text is not correct");
         emailField.sendKeys(userEmail);
         passwordField.sendKeys(userPassword);
         signInButton.click();
 
         WebElement loginWrongPasswordErrorMessage = driver.findElement(By.xpath("//div[@id='error-for-password']"));
-        Assert.assertEquals(loginWrongPasswordErrorMessage.getText(), "Hmm, that's not the right password. Please try again or request a new one.");
+        WebElement passwordFieldOnError = driver.findElement(By.xpath("//input[@id='password']"));
+        Assert.assertEquals(loginWrongPasswordErrorMessage.getText(), "Hmm, that's not the right password. Please try again or request a new one.", "LogIn error text is not correct");
+        Assert.assertEquals(passwordFieldOnError.getAttribute("aria-describedby"), "error-for-password", "Password field is not highlighted");
 
         driver.quit();
     }
