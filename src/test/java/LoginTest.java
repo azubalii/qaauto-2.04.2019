@@ -10,36 +10,17 @@ public class LoginTest {
     public void successfulLoginTest() {
         System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
-        String linkedInUrl = "https://www.linkedin.com";
-        String userEmail = "auto.test.email01@gmail.com";
-        String userPassword = "linked123";
+        driver.get("https://www.linkedin.com");
 
-        driver.get(linkedInUrl);
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("auto.test.email01@gmail.com", "linked123");
 
-        WebElement emailField = driver.findElement(By.xpath("//input[@id='login-email']"));
-        WebElement passwordField = driver.findElement(By.xpath("//input[@id='login-password']"));
-        WebElement signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
+        HomePage homePage = new HomePage(driver);
+        Assert.assertTrue(homePage.isProfileMenuItemDisplayed(), "Homepage is not loaded.");
 
-        Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up ", "LogIn page is not loaded.");
-        Assert.assertEquals(emailField.getAttribute("placeholder"), "Email", "Placeholder is not correct in Email field");
-        Assert.assertEquals(passwordField.getAttribute("placeholder"), "Password", "Placeholder is not correct in Password field");
-        Assert.assertEquals(signInButton.getAttribute("value"), "Sign in", "SignIn button text is not correct");
-        emailField.sendKeys(userEmail);
-        passwordField.sendKeys(userPassword);
-        signInButton.click();
+        homePage.clickOnProfileMenuItem();
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        WebElement profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
-        Assert.assertTrue(profileMenuItem.isDisplayed(), "Homepage is not loaded.");
-        profileMenuItem.click();
-
-        WebElement profileUserName = driver.findElement(By.xpath("//ul[@id='nav-settings__dropdown-options']//h3"));
-        Assert.assertEquals(profileUserName.getText(), "Kian Miller", "Wrong profile user name displayed.");
+        Assert.assertEquals(homePage.getProfileUserNameText(), "Kian Miller", "Wrong profile user name displayed.");
 
         driver.quit();
     }
