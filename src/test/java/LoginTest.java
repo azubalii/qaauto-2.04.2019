@@ -32,7 +32,7 @@ public class LoginTest {
 
         Assert.assertEquals(loginPage.getTitleText(), "LinkedIn: Log In or Sign Up ", "LogIn page is not loaded.");
         Assert.assertEquals(loginPage.getEmailFieldDirAttribute(), "ltr", "Email field is blank.");
-        Assert.assertTrue(loginPage.isSinginButtonDisplayed(), "LogIn page is not displayed.");
+        Assert.assertTrue(loginPage.isSingInButtonDisplayed(), "LogIn page is not displayed.");
 
         driver.quit();
     }

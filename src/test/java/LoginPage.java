@@ -5,9 +5,9 @@ import org.openqa.selenium.WebElement;
 public class LoginPage {
     WebDriver driver;
 
-    WebElement emailField;
-    WebElement passwordField;
-    WebElement signInButton;
+    private WebElement emailField;
+    private WebElement passwordField;
+    private WebElement signInButton;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -39,7 +39,7 @@ public class LoginPage {
         return emailField.getAttribute("dir");
     }
 
-    public Boolean isSinginButtonDisplayed() {
+    public Boolean isSingInButtonDisplayed() {
         return signInButton.isDisplayed();
     }
 }
