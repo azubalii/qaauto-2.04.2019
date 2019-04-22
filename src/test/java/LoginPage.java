@@ -30,4 +30,16 @@ public class LoginPage {
             e.printStackTrace();
         }
     }
+
+    public String getTitleText() {
+        return driver.getTitle();
+    }
+
+    public String getEmailFieldDirAttribute() {
+        return emailField.getAttribute("dir");
+    }
+
+    public Boolean isSinginButtonDisplayed() {
+        return signInButton.isDisplayed();
+    }
 }

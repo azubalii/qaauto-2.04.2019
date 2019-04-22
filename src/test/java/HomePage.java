@@ -25,10 +25,8 @@ public class HomePage {
         profileMenuItem.click();
     }
 
-    public String getProfileUserNameText () {
+    public String getProfileUserNameText() {
         profileUserName = driver.findElement(By.xpath("//ul[@id='nav-settings__dropdown-options']//h3"));
         return profileUserName.getText();
     }
-
-
 }
