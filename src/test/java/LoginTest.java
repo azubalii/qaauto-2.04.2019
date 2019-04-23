@@ -9,8 +9,9 @@ public class LoginTest {
     @DataProvider
     public Object[][] validDataProvider() {
         return new Object[][]{
-                { "auto.test.email01@gmail.com", "linked123" },
-                { "Auto.Test.Email01@gmail.com", "linked123" }
+                {"auto.test.email01@gmail.com", "linked123"},
+                {"Auto.Test.Email01@gmail.com", "linked123"},
+                {" Auto.Test.Email01@gmail.com", "linked123"}
         };
     }
 
@@ -31,35 +32,51 @@ public class LoginTest {
         driver.quit();
     }
 
-    @Test
-    public void negativeLoginTestEmptyCredentials() {
+    @DataProvider
+    public Object[][] emptyDataProvider() {
+        return new Object[][]{
+                {"auto.test.email01@gmail.com", ""},
+                {"", "linked123"},
+                {"", ""}
+        };
+    }
+
+    @Test(dataProvider = "emptyDataProvider")
+    public void negativeLoginTestEmptyCredentials(String userEmail, String userPassword) {
         System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
 
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("auto.test.email01@gmail.com", "");
+        loginPage.login(userEmail, userPassword);
 
-        Assert.assertEquals(loginPage.getEmailFieldDirAttribute(), "ltr", "Email field is blank.");
         Assert.assertTrue(loginPage.isSingInButtonDisplayed(), "LogIn page is not displayed.");
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is displayed");
 
         driver.quit();
     }
 
-    @Test
-    public void negativeLoginTestWrongPassword() {
+    @DataProvider
+    public Object[][] invalidDataProvider() {
+        return new Object[][]{
+                {"auto.test.email01@gmail.com", "_linked123"},
+                {"_Auto.Test.Email01@gmail.com", "linked123"},
+                {"_Auto.Test.Email01@gmail.com", "_linked123"}
+        };
+    }
+
+    @Test(dataProvider = "invalidDataProvider")
+    public void negativeLoginTestWrongCredentials(String userEmail, String userPassword) {
         System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
 
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("auto.test.email01@gmail.com", "_linked123");
+        loginPage.login(userEmail, userPassword);
 
         WelcomeBackPage welcomeBackPage = new WelcomeBackPage(driver);
-        Assert.assertEquals(welcomeBackPage.getErrorForPasswordText(), "Hmm, that's not the right password. Please try again or request a new one.", "LogIn error text is not correct");
-        Assert.assertEquals(welcomeBackPage.getPasswordFieldAreaDescribedByAttribute(), "error-for-password", "Password field is not highlighted");
 
+        Assert.assertTrue(welcomeBackPage.isWelcomePageDisplayed(), "Welcome page is not displayed");
         driver.quit();
     }
 }

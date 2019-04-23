@@ -26,22 +26,20 @@ public class LoginPage {
         emailField.sendKeys(userEmail);
         passwordField.sendKeys(userPassword);
         signInButton.click();
+        /*
         try {
             sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getEmailFieldDirAttribute() {
-        return emailField.getAttribute("dir");
+        */
     }
 
     public Boolean isSingInButtonDisplayed() {
         return signInButton.isDisplayed();
     }
 
-    public Boolean isPageLoaded(){
+    public Boolean isPageLoaded() {
         return driver.getCurrentUrl().equals("https://www.linkedin.com/")
                 && driver.getTitle().contains("LinkedIn: Log In or Sign Up");
     }

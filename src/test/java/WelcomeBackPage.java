@@ -4,10 +4,9 @@ import org.openqa.selenium.WebElement;
 
 public class WelcomeBackPage {
     private WebDriver driver;
-    //private WebElement emailField;
+    private WebElement emailField;
     private WebElement passwordField;
-    //private WebElement signInButton;
-    private WebElement errorForPassword;
+    private WebElement signInButton;
 
     public WelcomeBackPage(WebDriver driver) {
         this.driver = driver;
@@ -15,17 +14,15 @@ public class WelcomeBackPage {
     }
 
     private void initElements() {
-        //emailField = driver.findElement(By.xpath("//input[@id='username']"));
+        emailField = driver.findElement(By.xpath("//input[@id='username']"));
         passwordField = driver.findElement(By.xpath("//input[@id='password']"));
-        //signInButton = driver.findElement(By.xpath("//button[@type='submit']"));
-        errorForPassword = driver.findElement(By.xpath("//div[@id='error-for-password']"));
+        signInButton = driver.findElement(By.xpath("//button[@type='submit']"));
+
     }
 
-    public String getErrorForPasswordText() {
-        return errorForPassword.getText();
-    }
-
-    public String getPasswordFieldAreaDescribedByAttribute() {
-        return passwordField.getAttribute("aria-describedby");
+    public boolean isWelcomePageDisplayed() {
+        return passwordField.isDisplayed()
+                && emailField.isDisplayed()
+                && signInButton.isDisplayed();
     }
 }
