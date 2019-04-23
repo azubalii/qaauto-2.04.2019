@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 public class HomePage {
     private WebDriver driver;
     private WebElement profileMenuItem;
-    private WebElement profileUserName;
+
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -26,6 +26,7 @@ public class HomePage {
     }
 
     public String getProfileUserNameText() {
+        WebElement profileUserName;
         profileUserName = driver.findElement(By.xpath("//ul[@id='nav-settings__dropdown-options']//h3"));
         return profileUserName.getText();
     }

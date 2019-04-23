@@ -2,8 +2,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import static java.lang.Thread.sleep;
+
 public class LoginPage {
-    WebDriver driver;
+    private WebDriver driver;
 
     private WebElement emailField;
     private WebElement passwordField;
@@ -25,14 +27,10 @@ public class LoginPage {
         passwordField.sendKeys(userPassword);
         signInButton.click();
         try {
-            Thread.sleep(3000);
+            sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getTitleText() {
-        return driver.getTitle();
     }
 
     public String getEmailFieldDirAttribute() {
@@ -41,5 +39,10 @@ public class LoginPage {
 
     public Boolean isSingInButtonDisplayed() {
         return signInButton.isDisplayed();
+    }
+
+    public Boolean isPageLoaded(){
+        return driver.getCurrentUrl().equals("https://www.linkedin.com/")
+                && driver.getTitle().contains("LinkedIn: Log In or Sign Up");
     }
 }

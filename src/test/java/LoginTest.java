@@ -1,17 +1,27 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginTest {
-    @Test
-    public void successfulLoginTest() {
+
+    @DataProvider
+    public Object[][] validDataProvider() {
+        return new Object[][]{
+                { "auto.test.email01@gmail.com", "linked123" },
+                { "Auto.Test.Email01@gmail.com", "linked123" }
+        };
+    }
+
+    @Test(dataProvider = "validDataProvider")
+    public void successfulLoginTest(String userEmail, String userPassword) {
         System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
 
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("auto.test.email01@gmail.com", "linked123");
+        loginPage.login(userEmail, userPassword);
 
         HomePage homePage = new HomePage(driver);
         Assert.assertTrue(homePage.isProfileMenuItemDisplayed(), "Homepage is not loaded.");
@@ -30,9 +40,9 @@ public class LoginTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("auto.test.email01@gmail.com", "");
 
-        Assert.assertEquals(loginPage.getTitleText(), "LinkedIn: Log In or Sign Up ", "LogIn page is not loaded.");
         Assert.assertEquals(loginPage.getEmailFieldDirAttribute(), "ltr", "Email field is blank.");
         Assert.assertTrue(loginPage.isSingInButtonDisplayed(), "LogIn page is not displayed.");
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is displayed");
 
         driver.quit();
     }
