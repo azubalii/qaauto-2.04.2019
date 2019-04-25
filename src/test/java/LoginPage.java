@@ -35,12 +35,9 @@ public class LoginPage {
         */
     }
 
-    public Boolean isSingInButtonDisplayed() {
-        return signInButton.isDisplayed();
-    }
-
-    public Boolean isPageLoaded() {
+    public Boolean isLoginPageLoaded() {
         return driver.getCurrentUrl().equals("https://www.linkedin.com/")
-                && driver.getTitle().contains("LinkedIn: Log In or Sign Up");
+                && driver.getTitle().contains("LinkedIn: Log In or Sign Up")
+                && signInButton.isDisplayed();
     }
 }

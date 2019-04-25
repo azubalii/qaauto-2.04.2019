@@ -25,9 +25,10 @@ public class LoginTest {
         loginPage.login(userEmail, userPassword);
 
         HomePage homePage = new HomePage(driver);
-        Assert.assertTrue(homePage.isProfileMenuItemDisplayed(), "Homepage is not loaded.");
+        Assert.assertTrue(homePage.isHomePageLoaded(), "Homepage is not loaded.");
+
         homePage.clickOnProfileMenuItem();
-        Assert.assertEquals(homePage.getProfileUserNameText(), "Kian Miller", "Wrong profile user name displayed.");
+        Assert.assertTrue(homePage.isProfileUserNameCorrect(), "User name is not correct");
 
         driver.quit();
     }
@@ -50,8 +51,7 @@ public class LoginTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(userEmail, userPassword);
 
-        Assert.assertTrue(loginPage.isSingInButtonDisplayed(), "LogIn page is not displayed.");
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is displayed");
+        Assert.assertTrue(loginPage.isLoginPageLoaded(), "Login page is not displayed");
 
         driver.quit();
     }
