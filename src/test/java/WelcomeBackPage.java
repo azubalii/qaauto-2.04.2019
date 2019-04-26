@@ -7,6 +7,8 @@ public class WelcomeBackPage {
     private WebElement emailField;
     private WebElement passwordField;
     private WebElement signInButton;
+    private WebElement userEmailValidationMessage;
+    private WebElement userPasswordValidationMessage;
 
     public WelcomeBackPage(WebDriver driver) {
         this.driver = driver;
@@ -17,12 +19,21 @@ public class WelcomeBackPage {
         emailField = driver.findElement(By.xpath("//input[@id='username']"));
         passwordField = driver.findElement(By.xpath("//input[@id='password']"));
         signInButton = driver.findElement(By.xpath("//button[@type='submit']"));
-
+        userEmailValidationMessage = driver.findElement((By.xpath("//div[@id='error-for-username']")));
+        userPasswordValidationMessage = driver.findElement((By.xpath("//div[@id='error-for-password']")));
     }
 
-    public boolean isWelcomePageDisplayed() {
+    public boolean isPageLoaded() {
         return passwordField.isDisplayed()
                 && emailField.isDisplayed()
                 && signInButton.isDisplayed();
+    }
+
+    public String getUserEmailValidationMessage() {
+        return userEmailValidationMessage.getText();
+    }
+
+    public String getUserPasswordValidationMessage() {
+        return userPasswordValidationMessage.getText();
     }
 }

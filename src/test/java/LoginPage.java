@@ -22,7 +22,7 @@ public class LoginPage {
         signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
     }
 
-    public void login(String userEmail, String userPassword) {
+    public HomePage login(String userEmail, String userPassword) {
         emailField.sendKeys(userEmail);
         passwordField.sendKeys(userPassword);
         signInButton.click();
@@ -33,6 +33,20 @@ public class LoginPage {
             e.printStackTrace();
         }
         */
+        return new HomePage(driver);
+    }
+
+    public void loginToLogin(String userEmail, String userPassword) {
+        emailField.sendKeys(userEmail);
+        passwordField.sendKeys(userPassword);
+        signInButton.click();
+    }
+
+    public WelcomeBackPage loginToWelcomePage(String userEmail, String userPassword) {
+        emailField.sendKeys(userEmail);
+        passwordField.sendKeys(userPassword);
+        signInButton.click();
+        return new WelcomeBackPage(driver);
     }
 
     public Boolean isLoginPageLoaded() {
