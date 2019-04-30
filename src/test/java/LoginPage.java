@@ -49,7 +49,7 @@ public class LoginPage {
         return new WelcomeBackPage(driver);
     }
 
-    public Boolean isLoginPageLoaded() {
+    public boolean isPageLoaded() {
         return driver.getCurrentUrl().equals("https://www.linkedin.com/")
                 && driver.getTitle().contains("LinkedIn: Log In or Sign Up")
                 && signInButton.isDisplayed();

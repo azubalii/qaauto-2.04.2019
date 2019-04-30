@@ -27,10 +27,10 @@ public class LoginTest {
 
     @Test(dataProvider = "validDataProvider")
     public void successfulLoginTest(String userEmail, String userPassword) {
-        Assert.assertTrue(loginPage.isLoginPageLoaded(), "Login page is not displayed");
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not displayed");
 
         HomePage homePage = loginPage.login(userEmail, userPassword);
-        Assert.assertTrue(homePage.isHomePageLoaded(), "Homepage is not loaded.");
+        Assert.assertTrue(homePage.isPageLoaded(), "Homepage is not loaded.");
 
         homePage.clickOnProfileMenuItem();
         Assert.assertTrue(homePage.isProfileUserNameCorrect(), "User name is not correct");
@@ -47,10 +47,10 @@ public class LoginTest {
 
     @Test(dataProvider = "emptyDataProvider")
     public void negativeLoginTestEmptyCredentials(String userEmail, String userPassword) {
-        Assert.assertTrue(loginPage.isLoginPageLoaded(), "Login page is not displayed");
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not displayed");
 
         loginPage.loginToLogin(userEmail, userPassword);
-        Assert.assertTrue(loginPage.isLoginPageLoaded(), "Login page is not displayed");
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not displayed");
     }
 
     @DataProvider
@@ -67,7 +67,7 @@ public class LoginTest {
                                                   String userPassword,
                                                   String userEmailValidationMessage,
                                                   String userPasswordValidationMessage) {
-        Assert.assertTrue(loginPage.isLoginPageLoaded(), "Login page is not displayed");
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not displayed");
 
         WelcomeBackPage welcomeBackPage =loginPage.loginToWelcomePage(userEmail, userPassword);
         Assert.assertTrue(welcomeBackPage.isPageLoaded(), "Welcome page is not displayed");
