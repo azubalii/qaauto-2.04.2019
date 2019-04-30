@@ -33,12 +33,10 @@ public class SearchResultPage {
         js.executeScript("window.scrollBy(0,2000)");
     }
 
-    public boolean isSearchTermsPresent() {
+    public boolean isSearchRequestPresentInResult() {
         boolean result = true;
         for (WebElement searchResult : searchResults) {
-            if (searchResult.getText().contains("HR")) {
-
-            } else {
+            if (!searchResult.getText().contains("HR")) {
                 result = false;
             }
         }

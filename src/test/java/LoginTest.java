@@ -27,7 +27,7 @@ public class LoginTest {
 
     @Test(dataProvider = "validDataProvider")
     public void successfulLoginTest(String userEmail, String userPassword) {
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not displayed");
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
         HomePage homePage = loginPage.login(userEmail, userPassword);
         Assert.assertTrue(homePage.isPageLoaded(), "Homepage is not loaded.");
@@ -47,10 +47,10 @@ public class LoginTest {
 
     @Test(dataProvider = "emptyDataProvider")
     public void negativeLoginTestEmptyCredentials(String userEmail, String userPassword) {
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not displayed");
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
         loginPage.loginToLogin(userEmail, userPassword);
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not displayed");
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
     }
 
     @DataProvider
@@ -67,10 +67,10 @@ public class LoginTest {
                                                   String userPassword,
                                                   String userEmailValidationMessage,
                                                   String userPasswordValidationMessage) {
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not displayed");
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
         WelcomeBackPage welcomeBackPage =loginPage.loginToWelcomePage(userEmail, userPassword);
-        Assert.assertTrue(welcomeBackPage.isPageLoaded(), "Welcome page is not displayed");
+        Assert.assertTrue(welcomeBackPage.isPageLoaded(), "Welcome page is not loaded.");
 
         Assert.assertEquals(welcomeBackPage.getUserEmailValidationMessage(), userEmailValidationMessage, "Wrong validation message on user email");
         Assert.assertEquals(welcomeBackPage.getUserPasswordValidationMessage(), userPasswordValidationMessage, "Wrong validation message on user password");

@@ -26,22 +26,22 @@ public class LinkedInSearchTest {
     }
 
     @Test(dataProvider = "validDataProvider")
-    public void successfulLoginTest(String userEmail, String userPassword, String searchRequest) {
-        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not displayed");
+    public void searchOnHomePageTest(String userEmail, String userPassword, String searchRequest) {
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
         HomePage homePage = loginPage.login(userEmail, userPassword);
-        Assert.assertTrue(homePage.isPageLoaded(), "Homepage is not loaded.");
+        Assert.assertTrue(homePage.isPageLoaded(), "Home page is not loaded.");
 
         SearchResultPage searchResultPage = homePage.search(searchRequest);
-        Assert.assertTrue(searchResultPage.isPageLoaded(), "Search is not loaded");
+        Assert.assertTrue(searchResultPage.isPageLoaded(), "Search page is not loaded.");
         Assert.assertEquals(searchResultPage.searchResultsSize(), 10, "Number of search results is not 10");
 
         searchResultPage.scrollThePage();
-        Assert.assertTrue(searchResultPage.isSearchTermsPresent(), "Search term not found");
+        Assert.assertTrue(searchResultPage.isSearchRequestPresentInResult(), "Search term \"" + searchRequest + "\" not found");
     }
 
     @AfterMethod
-    public void afterMethod(){
+    public void afterMethod() {
         driver.quit();
     }
 }
