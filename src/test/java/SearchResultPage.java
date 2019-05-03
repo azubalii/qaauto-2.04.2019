@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class SearchResultPage {
     private WebDriver driver;
     private WebElement searchElement;
@@ -26,6 +28,14 @@ public class SearchResultPage {
 
     public int searchResultsSize() {
         return searchResults.size();
+    }
+
+    public void sleepTime(int time) {
+        try {
+            sleep(time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void scrollThePage() {
