@@ -36,10 +36,9 @@ public class LinkedInSearchTest {
         Assert.assertTrue(searchResultPage.isPageLoaded(), "Search page is not loaded.");
         Assert.assertEquals(searchResultPage.searchResultsSize(), 10, "Number of search results is not 10");
 
-        searchResultPage.sleepTime(1000);
         searchResultPage.scrollThePage();
         searchResultPage.sleepTime(1000);
-        Assert.assertTrue(searchResultPage.isSearchRequestPresentInResult(), "Search term \"" + searchRequest + "\" not found");
+        Assert.assertTrue(searchResultPage.isSearchRequestPresentInResult(searchRequest), "Search term \"" + searchRequest + "\" not found");
     }
 
     @AfterMethod

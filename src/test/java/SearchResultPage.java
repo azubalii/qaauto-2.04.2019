@@ -9,8 +9,8 @@ import static java.lang.Thread.sleep;
 
 public class SearchResultPage {
     private WebDriver driver;
-    private WebElement searchElement;
-    private List<WebElement> searchResults;
+    private WebElement searchResultsBlock;
+    private List<WebElement> searchResultsElements;
 
     public SearchResultPage(WebDriver driver) {
         this.driver = driver;
@@ -18,16 +18,16 @@ public class SearchResultPage {
     }
 
     private void initElements() {
-        searchElement = driver.findElement(By.xpath("//li[contains(@class,'search-result search-result__occluded-item')]"));
-        searchResults = driver.findElements(By.xpath("//li[contains(@class,'search-result search-result__occluded-item')]"));
+        searchResultsBlock = driver.findElement(By.xpath("//div[@class='search-results-page core-rail']"));
+        searchResultsElements = driver.findElements(By.xpath("//li[contains(@class,'search-result search-result__occluded-item')]"));
     }
 
     public boolean isPageLoaded() {
-        return searchElement.isDisplayed();
+        return searchResultsBlock.isDisplayed();
     }
 
     public int searchResultsSize() {
-        return searchResults.size();
+        return searchResultsElements.size();
     }
 
     public void sleepTime(int time) {
@@ -43,11 +43,12 @@ public class SearchResultPage {
         js.executeScript("window.scrollBy(0,2000)");
     }
 
-    public boolean isSearchRequestPresentInResult() {
+    public boolean isSearchRequestPresentInResult(String searchRequest) {
         boolean result = true;
-        for (WebElement searchResult : searchResults) {
-            if (!searchResult.getText().contains("HR")) {
+        for (WebElement searchResultElement : searchResultsElements) {
+            if (!searchResultElement.getText().contains(searchRequest)) {
                 result = false;
+                sleepTime(5000);
             }
         }
         return result;
