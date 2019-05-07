@@ -24,7 +24,7 @@ public class HomePage {
 
     private void initElements() {
         profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
-        searchField = driver.findElement(By.xpath("//artdeco-typeahead-deprecated[@id='nav-search-artdeco-typeahead']//input"));
+        searchField = driver.findElement(By.xpath("//form[@id='extended-nav-search']//input"));
     }
 
     // is get set
@@ -44,8 +44,8 @@ public class HomePage {
                 .equals("Kian Miller");
     }
 
-    public SearchResultPage search(String searchRequest) {
-        searchField.sendKeys(searchRequest, Keys.ENTER);
+    public SearchResultPage search(String searchTerm) {
+        searchField.sendKeys(searchTerm, Keys.ENTER);
         try {
             sleep(3000);
         } catch (InterruptedException e) {

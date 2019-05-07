@@ -3,14 +3,15 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Thread.sleep;
 
 public class SearchResultPage {
     private WebDriver driver;
-    private WebElement searchResultsBlock;
-    private List<WebElement> searchResultsElements;
+    private WebElement searchResultsContainer;
+    private List<WebElement> searchResultElements;
 
     public SearchResultPage(WebDriver driver) {
         this.driver = driver;
@@ -18,16 +19,16 @@ public class SearchResultPage {
     }
 
     private void initElements() {
-        searchResultsBlock = driver.findElement(By.xpath("//div[@class='search-results-page core-rail']"));
-        searchResultsElements = driver.findElements(By.xpath("//li[contains(@class,'search-result search-result__occluded-item')]"));
+        searchResultsContainer = driver.findElement(By.xpath("//div[@class='search-results-page core-rail']"));
+        searchResultElements = driver.findElements(By.xpath("//li[contains(@class,'search-result search-result__occluded-item')]"));
     }
 
     public boolean isPageLoaded() {
-        return searchResultsBlock.isDisplayed();
+        return searchResultsContainer.isDisplayed();
     }
 
-    public int searchResultsSize() {
-        return searchResultsElements.size();
+    public int getSearchResultsSize() {
+        return searchResultElements.size();
     }
 
     public void sleepTime(int time) {
@@ -44,11 +45,21 @@ public class SearchResultPage {
     }
 
     public boolean isSearchRequestPresentInResult(String searchRequest) {
-        for (WebElement searchResultElement : searchResultsElements) {
+        for (WebElement searchResultElement : searchResultElements) {
             if (!searchResultElement.getText().contains(searchRequest)) {
                 return false;
             }
         }
         return true;
+    }
+
+    public List<String> getSearchResultsTest() {
+        List<String> searchResultsList = new ArrayList<String>();
+        for (WebElement searchResultElement : searchResultElements){
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", searchResultElement);
+            String searchResultText = searchResultElement.getText();
+            searchResultsList.add(searchResultText);
+        }
+        return searchResultsList;
     }
 }
