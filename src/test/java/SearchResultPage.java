@@ -44,13 +44,11 @@ public class SearchResultPage {
     }
 
     public boolean isSearchRequestPresentInResult(String searchRequest) {
-        boolean result = true;
         for (WebElement searchResultElement : searchResultsElements) {
             if (!searchResultElement.getText().contains(searchRequest)) {
-                result = false;
-                sleepTime(5000);
+                return false;
             }
         }
-        return result;
+        return true;
     }
 }

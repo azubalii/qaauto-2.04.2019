@@ -1,48 +1,31 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class LinkedInSearchTest {
-    private WebDriver driver;
-    private LoginPage loginPage;
+public class LinkedInSearchTest extends BaseTest {
 
     @BeforeMethod
-    public void beforeMethod() {
-        System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.get("https://www.linkedin.com");
-        loginPage = new LoginPage(driver);
+    public void beforeMethodTwo (){
+        System.out.println("2nd before method");
     }
 
-    @DataProvider
-    public Object[][] validDataProvider() {
-        return new Object[][]{
-                {"auto.test.email01@gmail.com", "linked123", "HR"}
-        };
-    }
+    @Test
+    public void searchOnHomePageTest() {
+        String userEmail = "auto.test.email01@gmail.com";
+        String userPassword = "linked123";
+        String searchTerm = "HR";
 
-    @Test(dataProvider = "validDataProvider")
-    public void searchOnHomePageTest(String userEmail, String userPassword, String searchRequest) {
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
         HomePage homePage = loginPage.login(userEmail, userPassword);
         Assert.assertTrue(homePage.isPageLoaded(), "Home page is not loaded.");
 
-        SearchResultPage searchResultPage = homePage.search(searchRequest);
+        SearchResultPage searchResultPage = homePage.search(searchTerm);
         Assert.assertTrue(searchResultPage.isPageLoaded(), "Search page is not loaded.");
         Assert.assertEquals(searchResultPage.searchResultsSize(), 10, "Number of search results is not 10");
 
         searchResultPage.scrollThePage();
         searchResultPage.sleepTime(1000);
-        Assert.assertTrue(searchResultPage.isSearchRequestPresentInResult(searchRequest), "Search term \"" + searchRequest + "\" not found");
-    }
-
-    @AfterMethod
-    public void afterMethod() {
-        driver.quit();
+        Assert.assertTrue(searchResultPage.isSearchRequestPresentInResult(searchTerm), "Search term \"" + searchTerm + "\" not found");
     }
 }

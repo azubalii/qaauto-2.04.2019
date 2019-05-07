@@ -1,20 +1,8 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
-public class LoginTest {
-    private WebDriver driver;
-    private LoginPage loginPage;
-
-    //TODO find out why not @BeforeTest
-    @BeforeMethod
-    public void beforeMethod(){
-        System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.get("https://www.linkedin.com");
-        loginPage = new LoginPage(driver);
-    }
+public class LoginTest extends BaseTest {
 
     @DataProvider
     public Object[][] validDataProvider() {
@@ -74,10 +62,5 @@ public class LoginTest {
 
         Assert.assertEquals(welcomeBackPage.getUserEmailValidationMessage(), userEmailValidationMessage, "Wrong validation message on user email");
         Assert.assertEquals(welcomeBackPage.getUserPasswordValidationMessage(), userPasswordValidationMessage, "Wrong validation message on user password");
-    }
-
-    @AfterMethod
-    public void afterMethod(){
-        driver.quit();
     }
 }
