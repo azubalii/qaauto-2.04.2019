@@ -7,7 +7,7 @@ import java.util.List;
 public class LinkedInSearchTest extends BaseTest {
 
     @BeforeMethod
-    public void beforeMethodTwo (){
+    public void beforeMethodTwo() {
         System.out.println("2nd before method");
     }
 
@@ -19,7 +19,7 @@ public class LinkedInSearchTest extends BaseTest {
 
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
-        HomePage homePage = loginPage.login(userEmail, userPassword);
+        HomePage homePage = loginPage.loginToHomePage(userEmail, userPassword);
         Assert.assertTrue(homePage.isPageLoaded(), "Home page is not loaded.");
 
         SearchResultPage searchResultPage = homePage.search(searchTerm);
@@ -31,7 +31,7 @@ public class LinkedInSearchTest extends BaseTest {
 //        Assert.assertTrue(searchResultPage.isSearchRequestPresentInResult(searchTerm), "Search term \"" + searchTerm + "\" not found");
 
         List<String> searchResults = searchResultPage.getSearchResultsTest();
-        for(String searchResult : searchResults){
+        for (String searchResult : searchResults) {
             Assert.assertTrue(searchResult.contains(searchTerm), "Search term " + searchTerm + " not found in: \n" + searchResult);
         }
     }

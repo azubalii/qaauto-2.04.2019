@@ -22,31 +22,24 @@ public class LoginPage {
         signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
     }
 
-    public HomePage login(String userEmail, String userPassword) {
-        emailField.sendKeys(userEmail);
-        passwordField.sendKeys(userPassword);
-        signInButton.click();
-        /*
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        */
+    public HomePage loginToHomePage(String userEmail, String userPassword) {
+        login(userEmail, userPassword);
         return new HomePage(driver);
     }
 
-    public void loginToLogin(String userEmail, String userPassword) {
-        emailField.sendKeys(userEmail);
-        passwordField.sendKeys(userPassword);
-        signInButton.click();
+    public void loginToLoginPage(String userEmail, String userPassword) {
+        login(userEmail, userPassword);
     }
 
     public WelcomeBackPage loginToWelcomePage(String userEmail, String userPassword) {
+        login(userEmail, userPassword);
+        return new WelcomeBackPage(driver);
+    }
+
+    public void login(String userEmail, String userPassword) {
         emailField.sendKeys(userEmail);
         passwordField.sendKeys(userPassword);
         signInButton.click();
-        return new WelcomeBackPage(driver);
     }
 
     public boolean isPageLoaded() {

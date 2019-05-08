@@ -17,7 +17,7 @@ public class LoginTest extends BaseTest {
     public void successfulLoginTest(String userEmail, String userPassword) {
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
-        HomePage homePage = loginPage.login(userEmail, userPassword);
+        HomePage homePage = loginPage.loginToHomePage(userEmail, userPassword);
         Assert.assertTrue(homePage.isPageLoaded(), "Homepage is not loaded.");
 
         homePage.clickOnProfileMenuItem();
@@ -37,7 +37,7 @@ public class LoginTest extends BaseTest {
     public void negativeLoginTestEmptyCredentials(String userEmail, String userPassword) {
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
-        loginPage.loginToLogin(userEmail, userPassword);
+        loginPage.loginToLoginPage(userEmail, userPassword);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
     }
 
@@ -57,7 +57,7 @@ public class LoginTest extends BaseTest {
                                                   String userPasswordValidationMessage) {
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
-        WelcomeBackPage welcomeBackPage =loginPage.loginToWelcomePage(userEmail, userPassword);
+        WelcomeBackPage welcomeBackPage = loginPage.loginToWelcomePage(userEmail, userPassword);
         Assert.assertTrue(welcomeBackPage.isPageLoaded(), "Welcome page is not loaded.");
 
         Assert.assertEquals(welcomeBackPage.getUserEmailValidationMessage(), userEmailValidationMessage, "Wrong validation message on user email");
