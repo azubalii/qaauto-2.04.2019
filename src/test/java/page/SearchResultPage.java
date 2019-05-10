@@ -1,26 +1,24 @@
+package page;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Thread.sleep;
-
-public class SearchResultPage {
-    private WebDriver driver;
+public class SearchResultPage extends BasePage {
+    @FindBy(xpath = "//div[@class='search-results-page core-rail']")
     private WebElement searchResultsContainer;
+    @FindBy(xpath = "//li[contains(@class,'search-result search-result__occluded-item')]")
     private List<WebElement> searchResultElements;
 
     public SearchResultPage(WebDriver driver) {
         this.driver = driver;
-        initElements();
-    }
-
-    private void initElements() {
-        searchResultsContainer = driver.findElement(By.xpath("//div[@class='search-results-page core-rail']"));
-        searchResultElements = driver.findElements(By.xpath("//li[contains(@class,'search-result search-result__occluded-item')]"));
+        PageFactory.initElements(driver, this);
     }
 
     public boolean isPageLoaded() {
@@ -30,7 +28,7 @@ public class SearchResultPage {
     public int getSearchResultsSize() {
         return searchResultElements.size();
     }
-
+/*
     public void sleepTime(int time) {
         try {
             sleep(time);
@@ -52,7 +50,7 @@ public class SearchResultPage {
         }
         return true;
     }
-
+*/
     public List<String> getSearchResultsTest() {
         List<String> searchResultsList = new ArrayList<String>();
         for (WebElement searchResultElement : searchResultElements){

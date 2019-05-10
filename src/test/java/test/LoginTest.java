@@ -1,6 +1,10 @@
+package test;
+
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import page.HomePage;
+import page.WelcomeBackPage;
 
 public class LoginTest extends BaseTest {
 
@@ -17,11 +21,11 @@ public class LoginTest extends BaseTest {
     public void successfulLoginTest(String userEmail, String userPassword) {
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
-        HomePage homePage = loginPage.loginToHomePage(userEmail, userPassword);
+        HomePage homePage = loginPage.login(userEmail, userPassword);
         Assert.assertTrue(homePage.isPageLoaded(), "Homepage is not loaded.");
 
         homePage.clickOnProfileMenuItem();
-        Assert.assertTrue(homePage.isProfileUserNameCorrect(), "User name is not correct");
+        Assert.assertEquals(homePage.getProfileUserNameText(), "Kian Miller", "User name is not correct");
     }
 
     @DataProvider
@@ -37,7 +41,7 @@ public class LoginTest extends BaseTest {
     public void negativeLoginTestEmptyCredentials(String userEmail, String userPassword) {
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
-        loginPage.loginToLoginPage(userEmail, userPassword);
+        loginPage.login(userEmail, userPassword);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
     }
 
@@ -57,7 +61,7 @@ public class LoginTest extends BaseTest {
                                                   String userPasswordValidationMessage) {
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
-        WelcomeBackPage welcomeBackPage = loginPage.loginToWelcomePage(userEmail, userPassword);
+        WelcomeBackPage welcomeBackPage = loginPage.login(userEmail, userPassword);
         Assert.assertTrue(welcomeBackPage.isPageLoaded(), "Welcome page is not loaded.");
 
         Assert.assertEquals(welcomeBackPage.getUserEmailValidationMessage(), userEmailValidationMessage, "Wrong validation message on user email");

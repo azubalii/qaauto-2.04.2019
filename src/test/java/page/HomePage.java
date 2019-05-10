@@ -1,30 +1,24 @@
-import org.openqa.selenium.By;
+package page;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import sun.awt.SunHints;
-
-import javax.naming.directory.SearchResult;
-
-import java.security.Key;
-
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import static java.lang.Thread.sleep;
 
-public class HomePage {
-    private WebDriver driver;
+public class HomePage extends BasePage {
 
+    @FindBy(xpath = "//li[@id='profile-nav-item']")
     private WebElement profileMenuItem;
+    @FindBy(xpath = "//form[@id='extended-nav-search']//input")
     private WebElement searchField;
-
+    @FindBy(xpath = "//ul[@id='nav-settings__dropdown-options']//h3")
+    private WebElement profileUserName;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        initElements();
-    }
-
-    private void initElements() {
-        profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
-        searchField = driver.findElement(By.xpath("//form[@id='extended-nav-search']//input"));
+        PageFactory.initElements(driver, this);
     }
 
     // is get set
@@ -38,10 +32,8 @@ public class HomePage {
                 && profileMenuItem.isDisplayed();
     }
 
-    public boolean isProfileUserNameCorrect() {
-        return driver.findElement(By.xpath("//ul[@id='nav-settings__dropdown-options']//h3"))
-                .getText()
-                .equals("Kian Miller");
+    public String getProfileUserNameText() {
+        return profileUserName.getText();
     }
 
     public SearchResultPage search(String searchTerm) {

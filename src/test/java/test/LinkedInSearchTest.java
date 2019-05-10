@@ -1,6 +1,10 @@
+package test;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import page.HomePage;
+import page.SearchResultPage;
 
 import java.util.List;
 
@@ -19,7 +23,7 @@ public class LinkedInSearchTest extends BaseTest {
 
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
-        HomePage homePage = loginPage.loginToHomePage(userEmail, userPassword);
+        HomePage homePage = loginPage.login(userEmail, userPassword);
         Assert.assertTrue(homePage.isPageLoaded(), "Home page is not loaded.");
 
         SearchResultPage searchResultPage = homePage.search(searchTerm);

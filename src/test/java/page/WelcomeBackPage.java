@@ -1,26 +1,26 @@
+package page;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class WelcomeBackPage {
-    private WebDriver driver;
+public class WelcomeBackPage extends BasePage {
+    @FindBy(xpath = "//input[@id='username']")
     private WebElement emailField;
+    @FindBy(xpath = "//input[@id='password']")
     private WebElement passwordField;
+    @FindBy(xpath = "//button[@type='submit']")
     private WebElement signInButton;
+    @FindBy(xpath = "//div[@id='error-for-username']")
     private WebElement userEmailValidationMessage;
+    @FindBy(xpath = "//div[@id='error-for-password']")
     private WebElement userPasswordValidationMessage;
 
     public WelcomeBackPage(WebDriver driver) {
         this.driver = driver;
-        initElements();
-    }
-
-    private void initElements() {
-        emailField = driver.findElement(By.xpath("//input[@id='username']"));
-        passwordField = driver.findElement(By.xpath("//input[@id='password']"));
-        signInButton = driver.findElement(By.xpath("//button[@type='submit']"));
-        userEmailValidationMessage = driver.findElement((By.xpath("//div[@id='error-for-username']")));
-        userPasswordValidationMessage = driver.findElement((By.xpath("//div[@id='error-for-password']")));
+        PageFactory.initElements(driver, this);
     }
 
     public boolean isPageLoaded() {
