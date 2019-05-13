@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static java.lang.Thread.sleep;
+
 public class LoginPage extends BasePage {
     @FindBy(xpath = "//input[@id='login-email']")
     private WebElement emailField;
@@ -13,6 +15,8 @@ public class LoginPage extends BasePage {
     private WebElement passwordField;
     @FindBy(xpath = "//input[@id='login-submit']")
     private WebElement signInButton;
+    @FindBy(xpath = "//a[@class='link-forgot-password']")
+    private WebElement forgotPasswordButton;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -37,5 +41,15 @@ public class LoginPage extends BasePage {
         } else {
             return (GenericPage) new LoginPage(driver);
         }
+    }
+
+    public ResetPasswordPage resetPassword(){
+        forgotPasswordButton.click();
+        try {
+            sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new ResetPasswordPage(driver);
     }
 }
