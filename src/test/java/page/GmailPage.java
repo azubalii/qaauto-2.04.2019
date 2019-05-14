@@ -11,7 +11,7 @@ public class GmailPage extends BasePage {
 
     @FindBy(xpath = "//tr[@class='zA zE']")
     private WebElement inboxMail;
-    @FindBy(xpath = "//a[contains(@data-saferedirecturl, 'linkedin')]")
+    @FindBy(xpath = "//a[contains(text(), 'Reset my password')]")
     private WebElement resetPasswordLink;
 
     public GmailPage(WebDriver driver) {
@@ -23,14 +23,16 @@ public class GmailPage extends BasePage {
         return inboxMail.isDisplayed();
     }
 
-    public EnterNewPasswordPage goToResetLink(){
+    public EnterNewPasswordPage goToResetLink() {
         inboxMail.click();
         try {
             sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        resetPasswordLink.click();
+        String resetPasswordHref = resetPasswordLink.getAttribute("data-saferedirecturl");
+        driver.get(resetPasswordHref);
+        //resetPasswordLink.click();
         try {
             sleep(5000);
         } catch (InterruptedException e) {

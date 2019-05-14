@@ -28,32 +28,33 @@ public class SearchResultPage extends BasePage {
     public int getSearchResultsSize() {
         return searchResultElements.size();
     }
-/*
-    public void sleepTime(int time) {
-        try {
-            sleep(time);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 
-    public void scrollThePage() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,2000)");
-    }
-
-    public boolean isSearchRequestPresentInResult(String searchRequest) {
-        for (WebElement searchResultElement : searchResultElements) {
-            if (!searchResultElement.getText().contains(searchRequest)) {
-                return false;
+    /*
+        public void sleepTime(int time) {
+            try {
+                sleep(time);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
-        return true;
-    }
-*/
+
+        public void scrollThePage() {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollBy(0,2000)");
+        }
+
+        public boolean isSearchRequestPresentInResult(String searchRequest) {
+            for (WebElement searchResultElement : searchResultElements) {
+                if (!searchResultElement.getText().contains(searchRequest)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    */
     public List<String> getSearchResultsTest() {
         List<String> searchResultsList = new ArrayList<String>();
-        for (WebElement searchResultElement : searchResultElements){
+        for (WebElement searchResultElement : searchResultElements) {
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", searchResultElement);
             String searchResultText = searchResultElement.getText();
             searchResultsList.add(searchResultText);

@@ -16,6 +16,7 @@ public class ResetPasswordLinkSentPage extends BasePage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
     public boolean isPageLoaded() {
         return resendLinkButton.isDisplayed();
     }

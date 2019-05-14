@@ -55,5 +55,6 @@ public class BadCodeExample {
                 System.out.println("Search term " + searchText + " NOT found in : \n" + searchResultText + "\n\n");
             }
         }
+
     }
 }

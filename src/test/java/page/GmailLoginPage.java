@@ -27,7 +27,7 @@ public class GmailLoginPage extends BasePage {
         return identifierField.isDisplayed();
     }
 
-    public void submitEmail(String email){
+    public void submitEmail(String email) {
         identifierField.sendKeys(email);
         identifierNextButton.click();
         try {
@@ -37,7 +37,7 @@ public class GmailLoginPage extends BasePage {
         }
     }
 
-    public GmailPage submitPassword(String password){
+    public GmailPage submitPassword(String password) {
         passwordField.sendKeys(password);
         try {
             sleep(3000);
@@ -50,6 +50,6 @@ public class GmailLoginPage extends BasePage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    return new GmailPage(driver);
+        return new GmailPage(driver);
     }
 }

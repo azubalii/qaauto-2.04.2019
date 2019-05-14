@@ -4,15 +4,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.*;
 
-public class ResetPasswordTest extends BaseTest{
-    //getLinkFromEmail
-
+public class ResetPasswordTest extends BaseTest {
 
     @Test
-    public void resetPasswordTest (){
+    public void resetPasswordTest() {
         String email = "auto.test.email02@gmail.com";
         String password1 = "gmail+123";
-        String password2 = "linked+1234";
+        String password2 = "linked!@#$%12";
 
         ResetPasswordPage resetPasswordPage = loginPage.resetPassword();
         Assert.assertTrue(resetPasswordPage.isPageLoaded(), "Reset Password page is not loaded.");
@@ -35,7 +33,6 @@ public class ResetPasswordTest extends BaseTest{
 
         HomePage homePage = resetPasswordSuccessPage.goToHomepage();
         Assert.assertTrue(homePage.isPageLoaded(), "Page is not loaded.");
-
 
 
     }
