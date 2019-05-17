@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import util.GmailService;
 
 import static java.lang.Thread.sleep;
 
@@ -21,13 +22,8 @@ public class ResetPasswordLinkSentPage extends BasePage {
         return resendLinkButton.isDisplayed();
     }
 
-    public GmailLoginPage redirectToGmailPage() {
-        driver.get("https://mail.google.com/mail/#inbox");
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return new GmailLoginPage(driver);
+    public EnterNewPasswordPage navigateToLinkFromEmail() {
+// extract sub-string from string in email response
+        return new EnterNewPasswordPage(driver);
     }
 }

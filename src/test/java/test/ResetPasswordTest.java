@@ -12,27 +12,24 @@ public class ResetPasswordTest extends BaseTest {
         String password1 = "gmail+123";
         String password2 = "linked!@#$%12";
 
-        ResetPasswordPage resetPasswordPage = loginPage.resetPassword();
+        ResetPasswordPage resetPasswordPage = loginPage.clickOnResetPasswordLink();
         Assert.assertTrue(resetPasswordPage.isPageLoaded(), "Reset Password page is not loaded.");
 
         ResetPasswordLinkSentPage resetPasswordLinkSentPage = resetPasswordPage.submitUsername(email);
         Assert.assertTrue(resetPasswordLinkSentPage.isPageLoaded(), "Reset Password Link Sent page is not loaded.");
 
-        GmailLoginPage gmailLoginPage = resetPasswordLinkSentPage.redirectToGmailPage();
-        Assert.assertTrue(gmailLoginPage.isPageLoaded(), "Page is not loaded.");
 
-        gmailLoginPage.submitEmail(email);
-        GmailPage gmailPage = gmailLoginPage.submitPassword(password1);
-        Assert.assertTrue(gmailPage.isPageLoaded(), "Page is not loaded.");
 
-        EnterNewPasswordPage enterNewPasswordPage = gmailPage.goToResetLink();
-        Assert.assertTrue(enterNewPasswordPage.isPageLoaded(), "Page is not loaded.");
+//        EnterNewPasswordPage enterNewPasswordPage =  resetPasswordLinkSentPage.navigateToLinkFromEmail();
+//        (transfer variable from one class to another)
 
-        ResetPasswordSuccessPage resetPasswordSuccessPage = enterNewPasswordPage.submitNewPassword(password2);
-        Assert.assertTrue(resetPasswordSuccessPage.isPageLoaded(), "Page is not loaded.");
-
-        HomePage homePage = resetPasswordSuccessPage.goToHomepage();
-        Assert.assertTrue(homePage.isPageLoaded(), "Page is not loaded.");
+//        Assert.assertTrue(enterNewPasswordPage.isPageLoaded(), "Page is not loaded.");
+//
+//        ResetPasswordSuccessPage resetPasswordSuccessPage = enterNewPasswordPage.submitNewPassword(password2);
+//        Assert.assertTrue(resetPasswordSuccessPage.isPageLoaded(), "Page is not loaded.");
+//
+//        HomePage homePage = resetPasswordSuccessPage.goToHomepage();
+//        Assert.assertTrue(homePage.isPageLoaded(), "Page is not loaded.");
 
 
     }

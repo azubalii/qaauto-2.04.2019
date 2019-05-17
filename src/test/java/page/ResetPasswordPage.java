@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import util.GmailService;
 
 public class ResetPasswordPage extends BasePage {
     @FindBy(xpath = "//input[@id='username']")
@@ -22,7 +23,18 @@ public class ResetPasswordPage extends BasePage {
 
     public ResetPasswordLinkSentPage submitUsername(String email) {
         usernameField.sendKeys(email);
+
+        String messageSubject = "the link to reset your password";
+        String messageTo = email;
+        String messageFrom = "security-noreply@linkedin.com";
+
+        GmailService gMailService = new GmailService();
+        gMailService.connect();
         findAccountButton.click();
+        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
+        System.out.println("Content: " + message);
+
+
         return new ResetPasswordLinkSentPage(driver);
     }
 

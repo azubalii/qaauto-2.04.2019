@@ -20,8 +20,8 @@ public class BaseTest {
         System.out.println("1st before method");
     }
 
-    @AfterMethod
-    public void afterMethod() {
-        driver.quit();
-    }
+//    @AfterMethod
+//    public void afterMethod() {
+//        driver.quit();
+//    }
 }

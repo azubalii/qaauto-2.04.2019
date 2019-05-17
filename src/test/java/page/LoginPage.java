@@ -43,7 +43,7 @@ public class LoginPage extends BasePage {
         }
     }
 
-    public ResetPasswordPage resetPassword() {
+    public ResetPasswordPage clickOnResetPasswordLink() {
         forgotPasswordButton.click();
         try {
             sleep(2000);
