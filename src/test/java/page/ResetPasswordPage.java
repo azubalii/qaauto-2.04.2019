@@ -4,7 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import util.GmailService;
+
+import static java.lang.Thread.sleep;
 
 public class ResetPasswordPage extends BasePage {
     @FindBy(xpath = "//input[@id='username']")
@@ -21,19 +22,13 @@ public class ResetPasswordPage extends BasePage {
         return usernameField.isDisplayed();
     }
 
-    public ResetPasswordLinkSentPage submitUsername(String email) {
+    public ResetPasswordLinkSentPage submitUsername(String email) throws InterruptedException {
+
         usernameField.sendKeys(email);
 
-        String messageSubject = "the link to reset your password";
-        String messageTo = email;
-        String messageFrom = "security-noreply@linkedin.com";
+        gmailService.connect();
 
-        GmailService gMailService = new GmailService();
-        gMailService.connect();
         findAccountButton.click();
-        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
-        System.out.println("Content: " + message);
-
 
         return new ResetPasswordLinkSentPage(driver);
     }
