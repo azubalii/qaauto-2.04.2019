@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import static java.lang.Thread.sleep;
 
 public class ResetPasswordLinkSentPage extends BasePage {
@@ -29,7 +30,7 @@ public class ResetPasswordLinkSentPage extends BasePage {
         String message = gmailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
         System.out.println("Content: " + message + "\n\n");
 
-        String resetLink = message.substring(message.indexOf("https://www.linkedin.com/e/v2"), message.indexOf("sig=")+14);
+        String resetLink = message.substring(message.indexOf("https://www.linkedin.com/e/v2"), message.indexOf("sig=") + 18);
         resetLink = resetLink.replace("&amp;", "&");
         System.out.println("Reset link is: " + resetLink);
         driver.get(resetLink);
