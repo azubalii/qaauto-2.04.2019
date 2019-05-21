@@ -5,7 +5,7 @@ import util.GmailService;
 
 public abstract class BasePage {
     protected WebDriver driver;
-    public static GmailService gmailService = new GmailService();
+    protected static GmailService gmailService = new GmailService();
 
     public abstract boolean isPageLoaded();
 }

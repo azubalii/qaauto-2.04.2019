@@ -20,7 +20,7 @@ public class ResetPasswordSuccessPage extends BasePage {
         return goToHomepageButton.isDisplayed();
     }
 
-    public HomePage goToHomepage(){
+    public HomePage goToHomepage() {
         goToHomepageButton.click();
         try {
             sleep(1000);

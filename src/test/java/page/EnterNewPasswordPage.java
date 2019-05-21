@@ -16,7 +16,6 @@ public class EnterNewPasswordPage extends BasePage {
     @FindBy(xpath = "//input[@id='confirmPassword']")
     private WebElement confirmPasswordField;
 
-
     public EnterNewPasswordPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);

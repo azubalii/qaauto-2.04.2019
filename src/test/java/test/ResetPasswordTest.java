@@ -9,7 +9,6 @@ public class ResetPasswordTest extends BaseTest {
     @Test
     public void resetPasswordTest() throws InterruptedException {
         String email = "auto.test.email02@gmail.com";
-        String password1 = "gmail+123";
         String password2 = "linked!@#$%12";
 
         ResetPasswordPage resetPasswordPage = loginPage.clickOnResetPasswordLink();
@@ -18,7 +17,7 @@ public class ResetPasswordTest extends BaseTest {
         ResetPasswordLinkSentPage resetPasswordLinkSentPage = resetPasswordPage.submitUsername(email);
         Assert.assertTrue(resetPasswordLinkSentPage.isPageLoaded(), "Reset Password Link Sent page is not loaded.");
 
-        EnterNewPasswordPage enterNewPasswordPage =  resetPasswordLinkSentPage.goToResetLink();
+        EnterNewPasswordPage enterNewPasswordPage = resetPasswordLinkSentPage.goToResetLink(email);
         Assert.assertTrue(enterNewPasswordPage.isPageLoaded(), "Page is not loaded.");
 
         ResetPasswordSuccessPage resetPasswordSuccessPage = enterNewPasswordPage.submitNewPassword(password2);

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import static java.lang.Thread.sleep;
 
 public class HomePage extends BasePage {
@@ -21,7 +22,6 @@ public class HomePage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    // is get set
     public void clickOnProfileMenuItem() {
         profileMenuItem.click();
     }

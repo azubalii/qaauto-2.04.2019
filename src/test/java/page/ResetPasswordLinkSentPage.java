@@ -21,14 +21,14 @@ public class ResetPasswordLinkSentPage extends BasePage {
         return resendLinkButton.isDisplayed();
     }
 
-    public EnterNewPasswordPage goToResetLink() throws InterruptedException {
+    public EnterNewPasswordPage goToResetLink(String email) throws InterruptedException {
 
         String messageSubject = "here's the link to reset your password";
-        String messageTo = "auto.test.email02@gmail.com";
+        String messageTo = email;
         String messageFrom = "security-noreply@linkedin.com";
 
         String message = gmailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
-        System.out.println("Content: " + message + "\n\n");
+        System.out.println("\n" + "Content: " + message + "\n");
 
         String resetLink = message.substring(message.indexOf("https://www.linkedin.com/e/v2"), message.indexOf("sig=") + 18);
         resetLink = resetLink.replace("&amp;", "&");
