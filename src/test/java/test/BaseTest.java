@@ -15,9 +15,9 @@ public class BaseTest {
     protected LoginPage loginPage;
 
     //TODO find out why not @BeforeTest
-    @Parameters("browserName")
+    @Parameters({"browserName", "language"})
     @BeforeMethod
-    public void beforeMethod(@Optional("chrome") String browserName) throws Exception {
+    public void beforeMethod(@Optional("chrome") String browserName, String language) throws Exception {
         if (browserName.toLowerCase().equals("chrome")){
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
@@ -29,7 +29,22 @@ public class BaseTest {
         }
 
         driver.manage().window().maximize();
-        driver.get("https://www.linkedin.com");
+
+        String baseLink = "https://www.linkedin.com";
+
+        if (language.toLowerCase().equals("en")){
+            driver.get(baseLink);
+        } else if (language.toLowerCase().equals("de")){
+            baseLink = "https://de.linkedin.com";
+            driver.get(baseLink);
+        } else if (language.toLowerCase().equals("ua")){
+            baseLink = "https://ua.linkedin.com";
+            driver.get(baseLink);
+        } else {
+            System.out.println("Localization is not defined. \nRunning with default link.");
+            driver.get(baseLink);
+        }
+
         loginPage = new LoginPage(driver);
         System.out.println("1st before method");
     }

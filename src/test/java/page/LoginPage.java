@@ -23,9 +23,21 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isPageLoaded() {
-        return driver.getCurrentUrl().equals("https://www.linkedin.com/")
-                && driver.getTitle().contains("LinkedIn: Log In or Sign Up")
-                && signInButton.isDisplayed();
+        if (driver.getCurrentUrl().equals("https://www.linkedin.com/")){
+            System.out.println("Base page is displayed");
+            return driver.getTitle().contains("LinkedIn: Log In or Sign Up")
+                    && signInButton.isDisplayed();
+        } else if (driver.getCurrentUrl().equals("https://ua.linkedin.com/")){
+            System.out.println("Ukraine page is displayed");
+            return driver.getTitle().contains("LinkedIn: Log In or Sign Up")
+                    && signInButton.isDisplayed();
+        } else if (driver.getCurrentUrl().equals("https://de.linkedin.com/")){
+            System.out.println("Deutsche page is displayed");
+            return driver.getTitle().contains("LinkedIn: Einloggen oder Registrieren")
+                    && signInButton.isDisplayed();
+        } else {
+            return false;
+        }
     }
 
     public <GenericPage> GenericPage login(String userEmail, String userPassword) {
