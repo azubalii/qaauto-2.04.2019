@@ -25,7 +25,7 @@ public class EnterNewPasswordPage extends BasePage {
         return submitButton.isDisplayed();
     }
 
-    public ResetPasswordSuccessPage submitNewPassword(String password2){
+    public ResetPasswordSuccessPage submitNewPassword(String password2) {
         newPasswordField.sendKeys(password2);
         confirmPasswordField.sendKeys(password2);
         submitButton.click();

@@ -1,6 +1,7 @@
 package util;
 
 import com.sun.mail.imap.IdleManager;
+
 import javax.mail.*;
 import javax.mail.event.MessageCountAdapter;
 import javax.mail.event.MessageCountEvent;
@@ -22,6 +23,7 @@ public class GmailService {
 
     /**
      * Example of util.GmailService usage
+     *
      * @param args - dummy args for main()
      */
     public static void main(String[] args) {
@@ -38,17 +40,18 @@ public class GmailService {
     /**
      * Default util.GmailService constructor with predefined user/pass credentials
      */
-    public GmailService(){
+    public GmailService() {
         this.user = "auto.test.email02@gmail.com";
         this.pass = "gmail+123";
     }
 
     /**
      * Custom util.GmailService constructor that allows to set user/pass credentials
+     *
      * @param user - gMail acc username
      * @param pass - gMail acc pass
      */
-    public GmailService(String user, String pass){
+    public GmailService(String user, String pass) {
         this.user = user;
         this.pass = pass;
     }
@@ -80,7 +83,7 @@ public class GmailService {
     }
 
     public String waitMessage(final String messageSubject, final String messageTo, final String messageFrom,
-                              long timeoutInSec){
+                              long timeoutInSec) {
         try {
             inboxFolder.open(Folder.READ_WRITE);
         } catch (MessagingException e) {
@@ -139,13 +142,13 @@ public class GmailService {
     private String getText(Part p) throws
             MessagingException, IOException {
         if (p.isMimeType("text/*")) {
-            String s = (String)p.getContent();
+            String s = (String) p.getContent();
             textIsHtml = p.isMimeType("text/html");
             return s;
         }
         if (p.isMimeType("multipart/alternative")) {
             // prefer html text over plain text
-            Multipart mp = (Multipart)p.getContent();
+            Multipart mp = (Multipart) p.getContent();
             String text = null;
             for (int i = 0; i < mp.getCount(); i++) {
                 Part bp = mp.getBodyPart(i);
@@ -163,7 +166,7 @@ public class GmailService {
             }
             return text;
         } else if (p.isMimeType("multipart/*")) {
-            Multipart mp = (Multipart)p.getContent();
+            Multipart mp = (Multipart) p.getContent();
             for (int i = 0; i < mp.getCount(); i++) {
                 String s = getText(mp.getBodyPart(i));
                 if (s != null)
