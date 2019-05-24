@@ -2,8 +2,8 @@
 
 <suite name="Login Test Suite" verbose="1">
 
-    <test name="English">
-        <!-- + ua, de, en -->
+    <test name="Ukrainian">
+
         <parameter name="language" value="ua"/>
         <classes>
             <class name="test.LoginTest">
@@ -27,7 +27,7 @@
         </classes>
     </test>
 
-    <test name="Ukrainian">
+    <test name="Custom">
         <parameter name="language" value="custom"/>
         <classes>
             <class name="test.LoginTest">
