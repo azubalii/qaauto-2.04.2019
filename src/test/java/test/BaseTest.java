@@ -17,7 +17,7 @@ public class BaseTest {
     //TODO find out why not @BeforeTest
     @Parameters({"browserName", "language"})
     @BeforeMethod
-    public void beforeMethod(@Optional("chrome") String browserName, String language) throws Exception {
+    public void beforeMethod(@Optional("chrome") String browserName, @Optional("en") String language) throws Exception {
         if (browserName.toLowerCase().equals("chrome")) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
